@@ -21,5 +21,5 @@ public class CaseNode {
         this.label = label;
     }
 
-    
+
 }
