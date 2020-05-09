@@ -1,0 +1,23 @@
+BE -> BE or BT @SLR_or
+| BT.
+BT -> BT and BF @SLR_and
+| BF.
+BF -> E
+| not BE @SLR_not
+| ( BE )
+| E < E @SLR_l
+| E > E @SLR_g
+| E == E @SLR_e
+| E != E @SLR_ne
+| E <= E @SLR_le
+| E >= E. @SLR_ge
+E -> E + T @SLR_add
+| E - T @SLR_minus
+| T.
+T -> T * F @SLR_mult
+| T / F @SLR_divide
+| F.
+F -> id @SLR_push_id
+| ( E )
+| num @SLR_push_num
+| ( - num ). @SLR_push_neg_num

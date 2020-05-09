@@ -1,0 +1,32 @@
+P -> void main ( ) { STL }
+STL -> ST STL'
+STL' -> lambda
+STL' -> ST STL'
+ST -> AST
+ST -> DCL
+TYPE -> int
+TYPE -> float
+TYPE -> char
+TYPE -> bool
+DCL -> @push_type TYPE DCL'
+DCL' -> @push_dec_id id DCL''
+DCL'' -> @create_var_desc ;
+AST -> @push_id id AST'
+AST' -> = AST''
+AST'' -> E AST'''
+AST''' -> @assign ;
+E -> E1 E'
+E' -> lambda
+E' -> | E1 @OR E'
+E1 -> E2 E1'
+E1' -> lambda
+E1' -> ^ E2 @XOR E1'
+E2 -> E3 E2'
+E2' -> lambda
+E2' -> & E3 @AND E2'
+E3 -> E4 E3'
+E3' -> lambda
+E3' -> << E4 @LSH E3'
+E3' -> >> E4 @RSH E3'
+E4 -> @push_id id
+E4 -> ( E )

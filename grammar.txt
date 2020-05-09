@@ -1,0 +1,87 @@
+P -> void main ( ) { STL }
+STL -> ST STL'
+STL' -> lambda
+STL' -> ST STL'
+ST -> IFST
+ST -> WST
+ST -> DWST
+ST -> FST
+ST -> AST
+ST -> SWST
+ST -> DCL
+ST -> SINGLE
+SINGLE -> SINGLE' @pre_inc_dec id ;
+SINGLE' -> @push_inc_dec ++
+SINGLE' -> @push_inc_dec --
+AST -> @push_id id AST'
+AST' -> = AST'' 
+AST' -> [ E @arr ] = E AST'''
+AST' -> SINGLE' @inc_dec_assign ;
+AST'' -> E AST'''
+AST'' -> & @push_id id @addr_assign ;
+AST''' -> @assign ;
+AST''' -> <= E @le_assign ;
+AST''' -> < E @l_assign ;
+AST''' -> >= E @ge_assign ;
+AST''' -> > E @g_assign ;
+AST''' -> == E @e_assign ;
+AST''' -> != E @ne_assign ;
+IFST -> if ( BE ) @if_jz IFST'
+IFST' -> ST IFST''
+IFST' -> { STL } IFST''
+IFST'' -> lambda @if_comp_jz
+IFST'' -> else @if_jmp IFST'''
+IFST''' -> ST @if_comp_jmp
+IFST''' -> { STL @if_comp_jmp }
+WST -> while ( @push_pc BE @while_jz ) WST'
+WST' -> ST @while_comp_jz
+WST' -> { STL @while_comp_jz }
+DWST -> do @push_pc DWST'
+DWST' -> ST while ( BE @do_while ) ;
+DWST' -> { STL } while ( BE @do_while ) ;
+FST -> for ( SAST ; @push_pc BE @for_jz ; IDST @for_inc_dec ) FST'
+FST' -> ST @for_comp
+FST' -> { STL @for_comp }
+SAST -> @push_id id = @move_num num
+IDST -> @push_id id IDST'
+IDST' -> @post_inc ++
+IDST' -> @post_dec --
+SWST -> switch ( @push_id @push_# id @switch_jmp ) { CASE
+CASE -> @switch }
+CASE -> case CV : @push_pc ST CASE' CASE
+CASE -> @push_default default : @push_pc ST @switch_jmp_out @switch }
+CV -> @push_cv_char character
+CV -> @push_cv_num num
+CASE' -> lambda
+CASE' -> break @switch_jmp_out ;
+TYPE -> int
+TYPE -> float
+TYPE -> char
+TYPE -> bool
+DCL -> @push_type TYPE DCL'
+DCL' -> * @push_dec_id id DCLP
+DCL' -> @push_dec_id id DCL''
+DCL'' -> @create_var_desc ;
+DCL'' -> @create_var_desc , DCL'
+DCL'' -> [ @push_num num ] DCLA
+DCLA -> @create_arr_desc ;
+DCLA -> @create_arr_desc , DCL'
+DCLP -> @create_pointer_desc ;
+DCLP -> @create_pointer_desc , DCL'
+E -> T E'
+E' -> + T @add E'
+E' -> - T @minus E'
+E' -> lambda
+T -> F T'
+T' -> * F @mult T'
+T' -> / F @divide T'
+T' -> % F @mode T'
+T' -> lambda
+F -> @push_id id F'
+F' -> lambda
+F' -> [ E @arr ]
+F -> @push_num num
+F -> ( F''
+F'' -> E )
+F'' -> - @push_neg_num num )
+BE -> #switch

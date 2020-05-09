@@ -1,0 +1,82 @@
+void main() {
+
+	// single declerations
+	int a, b;
+	int *c;
+	int d[24];
+	// multiple declerations
+	float e, *f, g[24];
+	int h;
+
+	/*
+	 Assignments 
+	*/
+	a = 24.33;
+	a[0] = 24;
+
+	// Boolean expression assignment
+	//a = a & b;
+
+	// complex expressions
+	a = a * b + c;
+	a = a[2] + (b * ( c + b ));
+	c[a * b] = c - (-24);
+
+	// comparison statement
+	a = a < b;
+	// single if with one statement, without else
+	if (a < b $)
+		a = b * g[0];
+
+	// single if with one statemtn, else with one statement
+	if (a != b $)
+		a = b;
+	else 
+		b++;
+
+	// below ifs with brackets
+	if ((a < b) && (a > b) $) {
+		e = a - b;
+		e--;
+	} else {
+		c = e;
+	}
+
+
+	// if-else if- else statement
+	if (a $)
+		a++;
+	else if (a $)
+		a--;
+	else 
+		b = b * b;
+
+	// while statement
+	while (a $){
+		a = a + (-24);
+	}
+
+	// do-while statement
+	do{
+		e++;
+	} while (a == b $);
+
+	// for statements 
+	for (a = 0; a <= b $; b++)
+		e = e + a;
+	for (h = 0; a $; e++){
+		e++;
+		e--;
+	}
+
+	// swith-case statement
+	switch(a){
+		case 1:
+			e++;
+		case 2:
+			e++;
+			break;
+		default:
+			a++;
+	}
+}
